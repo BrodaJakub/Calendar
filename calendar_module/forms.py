@@ -4,7 +4,7 @@ from .models import Event
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['title', 'description', 'start_time', 'end_time']
+        fields = ['title', 'description', 'start_time', 'end_time', 'user']
         widgets = {
             'start_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             'end_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
@@ -14,4 +14,5 @@ class EventForm(forms.ModelForm):
             'description': 'Opis',
             'start_time': 'Czas rozpoczęcia',
             'end_time': 'Czas zakończenia',
+            'user': 'ID użytkownika',
         }
