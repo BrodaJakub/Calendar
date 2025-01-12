@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona główna</title>
+</head>
+<body>
+    <h1>Kalendarz</h1>
+    <p><strong>Dzisiaj:</strong> {{ today }}</p>
+
+    <h2>Wybierz użytkownika</h2>
+    <form method="get" action="">
+        <select name="user">
+            <option value="" {% if not selected_user %}selected{% endif %}>-- Wybierz użytkownika --</option>
+            {% for user in users %}
+            <option value="{{ user.id }}" {% if selected_user and user.id == selected_user.id %}selected{% endif %}>
+                {{ user.username }}
+            </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Pokaż wydarzenia</button>
+    </form>
+
+    <h2>Wydarzenia</h2>
+    {% if selected_user %}
+        {% if events %}
+            <ul>
+                {% for event in events %}
+                <li>
+                    <strong>{{ event.title }}</strong><br>
+                    {{ event.description }}<br>
+                    Od: {{ event.start_time }}<br>
+                    Do: {{ event.end_time }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Brak wydarzeń dla wybranego użytkownika.</p>
+        {% endif %}
+    {% else %}
+        <p>Wybierz użytkownika, aby zobaczyć wydarzenia.</p>
+    {% endif %}
+</body>
+</html>
