@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from calendar_module.views import add_event
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('add-event/', add_event, name='add_event'),
 ]
