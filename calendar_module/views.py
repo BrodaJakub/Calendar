@@ -8,11 +8,10 @@ from .models import Event
 def home(request):
     # Pobranie aktualnej daty
     today = date.today()
-    
-    # Tymczasowy wybór użytkownika
-    user_id = request.GET.get('user')  # Pobieramy ID użytkownika z parametru GET
-    if user_id:
-        user = User.objects.get(id=user_id)
+
+    if request.user.is_authenticated:
+        # Pobranie wydarzeń dla zalogowanego użytkownika
+        user = request.user
         events = Event.objects.filter(user=user).order_by('start_time')
     else:
         user = None
@@ -22,8 +21,7 @@ def home(request):
     return render(request, 'home.html', {
         'today': today,
         'events': events,
-        'users': User.objects.all(),  # Lista użytkowników do wyboru
-        'selected_user': user
+        'user': user,
     })
 
 def add_event(request):
