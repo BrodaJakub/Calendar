@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth.views import LoginView
 from calendar_module.views import add_event, home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('add-event/', add_event, name='add_event'),
+    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
 ]
