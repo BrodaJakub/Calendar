@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event.title }}</title>
+</head>
+<body>
+    <h1>{{ event.title }}</h1>
+    <p><strong>Opis:</strong> {{ event.description }}</p>
+    <p><strong>Czas rozpoczęcia:</strong> {{ event.start_time|date:"Y-m-d H:i" }}</p>
+    <p><strong>Czas zakończenia:</strong> {{ event.end_time|date:"Y-m-d H:i" }}</p>
+
+    <a href="/">Powrót do strony głównej</a>
+</body>
+</html>

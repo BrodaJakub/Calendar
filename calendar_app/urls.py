@@ -14,10 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.contrib.auth.views import LoginView, LogoutView
-from calendar_module.views import add_event, home
+from django.contrib import admin # type: ignore
+from django.urls import path, include # type: ignore
+from django.contrib.auth.views import LoginView, LogoutView # type: ignore
+from calendar_module.views import add_event, home, event_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('add-event/', add_event, name='add_event'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('event/<int:event_id>/', event_detail, name='event_detail'),
 ]
