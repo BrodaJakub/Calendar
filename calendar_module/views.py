@@ -26,18 +26,20 @@ def home(request):
         'user': user,
     })
 
+@login_required
 def add_event(request):
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
-            form.save()
+            event = form.save(commit=False)
+            event.user = request.user
+            event.save()
             return redirect('/')  # Przekierowanie po zapisaniu
     else:
         form = EventForm()
     
     return render(request, 'add_event.html', {'form': form})
 
-@login_required
 def event_detail(request, event_id):
     # Pobranie wydarzenia lub zwrócenie błędu 404
     event = get_object_or_404(Event, id=event_id)
@@ -46,3 +48,25 @@ def event_detail(request, event_id):
         return HttpResponseForbidden("Nie masz dostępu do tego wydarzenia.")
     
     return render(request, 'event_detail.html', {'event': event})
+
+def edit_event(request, event_id):
+    # Pobranie wydarzenia lub zwrócenie 404
+    event = get_object_or_404(Event, id=event_id)
+
+    # Sprawdzenie, czy zalogowany użytkownik jest właścicielem wydarzenia
+    if event.user != request.user:
+        return HttpResponseForbidden("Nie masz dostępu do tego wydarzenia.")
+
+    if request.method == 'POST':
+        # Przesłanie formularza z danymi
+        form = EventForm(request.POST, instance=event)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.user = request.user
+            event.save()
+            return redirect('event_detail', event_id=event.id)
+    else:
+        # Wyświetlenie formularza z istniejącymi danymi wydarzenia
+        form = EventForm(instance=event)
+
+    return render(request, 'edit_event.html', {'form': form, 'event': event})
