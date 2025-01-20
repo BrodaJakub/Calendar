@@ -17,12 +17,13 @@ Including another URLconf
 from django.contrib import admin # type: ignore
 from django.urls import path, include # type: ignore
 from django.contrib.auth.views import LoginView, LogoutView # type: ignore
-from calendar_module.views import add_event, home, event_detail, edit_event, delete_event
+from calendar_module.views import add_event, home, event_detail, edit_event, delete_event, register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('add-event/', add_event, name='add_event'),
+    path('register/', register, name='register'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('event/<int:event_id>/', event_detail, name='event_detail'),

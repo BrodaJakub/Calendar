@@ -19,7 +19,6 @@
                     <a href="{% url 'event_detail' event.id %}">
                         <strong>{{ event.title }}</strong>
                     </a><br>
-                    {{ event.description }}<br>
                     Od: {{ event.start_time|date:"Y-m-d H:i" }}<br>
                     Do: {{ event.end_time|date:"Y-m-d H:i" }}
                 </li>
@@ -35,6 +34,7 @@
     {% else %}
         <p><strong>Zaloguj się, aby zobaczyć wydarzenia.</strong></p>
         <a href="{% url 'login' %}"><button type="button">Zaloguj się</button></a>
+        <a href="{% url 'register' %}"><button type="button">Zarejestruj się</button></a>
     {% endif %}
 
     <h2>Dodaj wydarzenie</h2>

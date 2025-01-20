@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404 # type: ignore
 from django.http import HttpResponseForbidden # type: ignore
+from django.contrib import messages # type: ignore
+from .forms import RegistrationForm
 from .forms import EventForm
 from datetime import date
-from django.contrib.auth.models import User # type: ignore
 from .models import Event
 
 
@@ -25,6 +26,17 @@ def home(request):
         'events': events,
         'user': user,
     })
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()  # Zapisz nowego użytkownika
+            messages.success(request, 'Konto zostało utworzone. Możesz się teraz zalogować.')
+            return redirect('login')  # Przekierowanie na stronę logowania
+    else:
+        form = RegistrationForm()
+    return render(request, 'register.html', {'form': form})
 
 @login_required
 def add_event(request):

@@ -12,7 +12,8 @@
         {{ form.as_p }}
         <button type="submit">Zaloguj się</button>
     </form>
-
+    <a href="{% url 'register' %}"><button type="button">Zarejestruj się</button></a>
+    
     {% if form.errors %}
         <ul>
             {% for field, errors in form.errors.items %}
