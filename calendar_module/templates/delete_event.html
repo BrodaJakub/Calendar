@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuń wydarzenie</title>
+</head>
+<body>
+    <h1>Usuń wydarzenie: {{ event.title }}</h1>
+    <p>Czy na pewno chcesz usunąć to wydarzenie?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Tak, usuń</button>
+        <a href="{% url 'event_detail' event.id %}">Anuluj</a>
+    </form>
+</body>
+</html>

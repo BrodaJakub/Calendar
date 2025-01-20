@@ -70,3 +70,17 @@ def edit_event(request, event_id):
         form = EventForm(instance=event)
 
     return render(request, 'edit_event.html', {'form': form, 'event': event})
+
+def delete_event(request, event_id):
+    # Pobierz wydarzenie lub zwróć 404
+    event = get_object_or_404(Event, id=event_id)
+
+    # Sprawdź, czy zalogowany użytkownik jest właścicielem wydarzenia
+    if event.user != request.user:
+        return HttpResponseForbidden("Nie masz dostępu do tego wydarzenia.")
+
+    if request.method == 'POST':
+        event.delete()  # Usuń wydarzenie
+        return redirect('home')  # Przekierowanie na stronę główną
+
+    return render(request, 'delete_event.html', {'event': event})

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin # type: ignore
 from django.urls import path, include # type: ignore
 from django.contrib.auth.views import LoginView, LogoutView # type: ignore
-from calendar_module.views import add_event, home, event_detail, edit_event
+from calendar_module.views import add_event, home, event_detail, edit_event, delete_event
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('event/<int:event_id>/', event_detail, name='event_detail'),
     path('event/<int:event_id>/edit/', edit_event, name='edit_event'),
+    path('event/<int:event_id>/delete/', delete_event, name='delete_event'),
 ]
