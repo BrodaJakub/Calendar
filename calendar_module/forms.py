@@ -56,7 +56,6 @@ class RegistrationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Ręczne usunięcie help text dla pól hasła
         self.fields['password2'].help_text = ''
 
     def clean_email(self):
