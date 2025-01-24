@@ -4,22 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 1rem;
+        }
+
+        .content-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form button {
+            padding: 0.8rem 1.5rem;
+            background: #0fbe44;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        form button:hover {
+            background: #57d9c1;
+        }
+
+        a button {
+            padding: 0.8rem 1.5rem;
+            background: #0fbe44;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+
+        a button:hover {
+            background: #57d9c1;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+            color: #ff4d4d;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Logowanie</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Zaloguj się</button>
-    </form>
-    <a href="{% url 'register' %}"><button type="button">Zarejestruj się</button></a>
-    
-    {% if form.errors %}
-        <ul>
-            {% for field, errors in form.errors.items %}
-                <li>{{ field }}: {{ errors }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div class="content-container">
+        <h1>Logowanie</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Zaloguj się</button>
+        </form>
+        <a href="{% url 'register' %}"><button type="button">Zarejestruj się</button></a>
+
+        {% if form.errors %}
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    <li>{{ field }}: {{ errors }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 </body>
 </html>

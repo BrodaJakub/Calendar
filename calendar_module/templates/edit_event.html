@@ -3,17 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <title>Edytuj wydarzenie</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 1rem;
+        }
+
+        .content-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form button {
+            padding: 0.8rem 1.5rem;
+            background: #0ed32f;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        form button:hover {
+            background: #57d9c1;
+        }
+
+        p {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+        }
+
+        p a {
+            color: #74ebd5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Edytuj wydarzenie: {{ event.title }}</h1>
+    <div class="content-container">
+        <h1>Edytuj wydarzenie: {{ event.title }}</h1>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Zapisz zmiany</button>
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Zapisz zmiany</button>
+        </form>
 
-    <p><a href="{% url 'event_detail' event.id %}">Powrót do szczegółów wydarzenia</a></p>
+        <p><a href="{% url 'event_detail' event.id %}">Powrót do szczegółów wydarzenia</a></p>
+    </div>
 </body>
 </html>
